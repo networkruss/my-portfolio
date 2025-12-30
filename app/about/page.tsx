@@ -1,14 +1,22 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion"; // Added Variants import
 import Link from "next/link";
 
 const skills = ["PHP", "Python", "MySQL", "React / Next.js", "C#", "ASP.NET", "Odoo ERP"];
 
 export default function AboutPage() {
-  const FADE_UP = {
+  // Added explicit Variants type to handle the custom cubic-bezier ease array
+  const FADE_UP: Variants = {
     hidden: { opacity: 0, y: 10 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: 0.8, 
+        ease: [0.16, 1, 0.3, 1] 
+      } 
+    },
   };
 
   return (
@@ -22,7 +30,10 @@ export default function AboutPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         {/* Narrative Section */}
         <motion.div 
-          initial="hidden" whileInView="show" viewport={{ once: true }} variants={FADE_UP}
+          initial="hidden" 
+          whileInView="show" 
+          viewport={{ once: true }} 
+          variants={FADE_UP}
           className="lg:col-span-7 space-y-6 md:space-y-8 border-l border-white/10 pl-6 md:pl-8"
         >
           <p className="text-white text-lg md:text-2xl font-medium tracking-tight leading-snug">
@@ -40,7 +51,10 @@ export default function AboutPage() {
 
         {/* Technical Stack (Minimalist List) */}
         <motion.div 
-          initial="hidden" whileInView="show" viewport={{ once: true }} variants={FADE_UP}
+          initial="hidden" 
+          whileInView="show" 
+          viewport={{ once: true }} 
+          variants={FADE_UP}
           className="lg:col-span-5 space-y-8 md:space-y-12"
         >
           <div>
