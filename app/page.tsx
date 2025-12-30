@@ -77,9 +77,9 @@ export default function Home() {
                       <Download className="w-8 h-8 text-blue-500 animate-bounce" />
                    </div>
                    <p className="text-[10px] uppercase tracking-[0.2em] text-slate-400 leading-relaxed">
-                     Para sa pinakamagandang view sa mobile, i-download o buksan ang PDF sa full screen mode.
+                     For Better View, touch download or buksan/open the PDF sa full screen mode.
                    </p>
-                   <a href="/resume.pdf" target="_blank" className="w-full py-4 bg-white text-black text-[10px] font-black uppercase tracking-[0.2em] rounded-sm">Buksan ang PDF</a>
+                   <a href="/resume.pdf" target="_blank" className="w-full py-4 bg-white text-black text-[10px] font-black uppercase tracking-[0.2em] rounded-sm">VIEW DOCUMENT</a>
                 </div>
               </div>
 
