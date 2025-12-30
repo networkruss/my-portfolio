@@ -5,7 +5,9 @@ import { useForm } from "@formspree/react";
 import { ArrowRight } from "lucide-react";
 
 export default function ContactPage() {
-  const [state, handleSubmit] = useForm("mdaojvoq");
+  // Use a public env var for the Formspree form ID, fallback to the hardcoded ID
+  const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_PROJECT_ID || "mdaojvoq";
+  const [state, handleSubmit] = useForm(formspreeId);
 
   const FADE_UP: Variants = {
     hidden: { opacity: 0, y: 10 },

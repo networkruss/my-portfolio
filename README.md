@@ -9,7 +9,7 @@ Set these in your `.env.local` for local testing and in your hosting provider (V
 - `GMAIL_USER` — Gmail address used by the contact API (e.g. `soliven.neilrussel.d@gmail.com`).
 - `GMAIL_PASS` — Gmail App Password (recommended, not your normal account password).
 - `NEXT_PUBLIC_BASE_URL` — Your site URL (e.g. `https://your-domain.com`). Used for client-side fetches if needed.
-- `FORMSPREE_PROJECT_ID` (optional) — Formspree project/form ID if you use Formspree instead of SMTP.
+- `NEXT_PUBLIC_FORMSPREE_PROJECT_ID` (recommended) — Formspree project/form ID for client-side use (example: `mdaojvoq`).
 
 > Never commit secrets to the repository. Use Vercel's Environment Variables UI or your host's secret store.
 
@@ -44,7 +44,7 @@ Start production server locally:
 1. Sign in to https://vercel.com and import this repository (choose your Git provider).
 2. In Project Settings -> Environment Variables, add the variables listed above for the `Production` environment.
 3. Trigger a deploy (Vercel runs `next build` automatically).
-4. After deployment, verify the contact form works (ensure SMTP or Formspree credentials are correct).
+4. After deployment, verify the contact form works. Formspree is used by default; set `NEXT_PUBLIC_FORMSPREE_PROJECT_ID` in Vercel if you want to override the built-in ID.
 
 ## Create a GitHub repository and push (recommended)
 
