@@ -9,6 +9,7 @@ interface Project {
   id: string;
   title: string;
   description: string;
+  isOngoing?: boolean; // Idinagdag para sa status check
 }
 
 export default function ProjectsPage() {
@@ -52,7 +53,6 @@ export default function ProjectsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 relative z-10">
-      {/* Responsive Editorial Header */}
       <motion.div 
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
@@ -62,11 +62,10 @@ export default function ProjectsPage() {
           Selected <br /> <span className="text-white/20">Works.</span>
         </h1>
         <p className="text-[9px] md:text-[10px] tracking-[0.3em] md:tracking-[0.4em] uppercase text-slate-500 max-w-[250px] md:max-w-sm leading-relaxed">
-          A curation of digital systems and web experiences / 2024 — 2025
+          A curation of digital systems and ongoing developments / 2024 — 2025
         </p>
       </motion.div>
 
-      {/* Responsive Minimalist Grid */}
       <motion.div 
         variants={container}
         initial="hidden"
@@ -80,9 +79,24 @@ export default function ProjectsPage() {
               className="group relative flex flex-col justify-between h-[350px] md:h-[400px] bg-[#030303] p-8 md:p-10 hover:bg-white/[0.02] transition-all duration-500"
             >
               <div className="flex justify-between items-start">
-                <span className="text-[8px] md:text-[9px] font-bold tracking-[0.4em] text-slate-600 uppercase">
-                  Index_0{index + 1}
-                </span>
+                <div className="flex flex-col gap-2">
+                  <span className="text-[8px] md:text-[9px] font-bold tracking-[0.4em] text-slate-600 uppercase">
+                    Index_0{index + 1}
+                  </span>
+                  
+                  {/* ONGOING INDICATOR */}
+                  {project.isOngoing && (
+                    <div className="flex items-center gap-2">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500"></span>
+                      </span>
+                      <span className="text-[8px] font-black tracking-[0.2em] text-blue-400 uppercase">
+                        Work in Progress
+                      </span>
+                    </div>
+                  )}
+                </div>
                 <ArrowUpRight className="w-4 h-4 text-slate-700 group-hover:text-blue-500 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-500" />
               </div>
 
@@ -95,7 +109,6 @@ export default function ProjectsPage() {
                 </p>
               </div>
 
-              {/* Responsive Decoration */}
               <div className="pt-6 md:pt-8 flex gap-4">
                  <div className="h-[1px] w-6 md:w-8 bg-blue-500/30 group-hover:w-12 md:group-hover:w-16 transition-all duration-700" />
               </div>
