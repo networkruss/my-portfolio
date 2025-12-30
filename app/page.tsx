@@ -9,6 +9,12 @@ export default function Home() {
     show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
   };
 
+  // Function para i-view ang PDF sa halip na i-download
+  const viewResume = () => {
+    // Bubuksan nito ang resume.pdf na nasa public folder sa bagong tab
+    window.open('/resume.pdf', '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="relative min-h-[85vh] flex flex-col items-center justify-center px-6 overflow-hidden">
       <motion.div 
@@ -24,10 +30,9 @@ export default function Home() {
           Web Developer
         </motion.p>
 
-        {/* Responsive Typography: 5xl for small, 7xl for medium, 9xl for large screens */}
         <motion.h1 
           variants={FADE_UP}
-          className="text-5xl sm:text-7xl md:text-9xl font-black mb-8 leading-[0.85] tracking-tighter break-words"
+          className="text-5xl sm:text-7xl md:text-9xl font-black mb-8 leading-[0.85] tracking-tighter break-words text-white"
         >
           CRAFTING <br /> 
           <span className="text-white/20">DIGITAL.</span>
@@ -41,7 +46,6 @@ export default function Home() {
           where <span className="text-white">logic meets aesthetics</span>.
         </motion.p>
 
-        {/* Responsive Button Layout: Column on small mobile, Row on larger devices */}
         <motion.div 
           variants={FADE_UP} 
           className="flex flex-col sm:flex-row gap-8 sm:gap-12 justify-center items-center"
@@ -53,6 +57,14 @@ export default function Home() {
             [ View Work ]
           </Link>
           
+          {/* UPDATED RESUME BUTTON: Popup view instead of direct download */}
+          <button
+            onClick={viewResume}
+            className="text-[10px] font-bold tracking-[0.3em] uppercase text-slate-500 hover:text-white transition-all cursor-pointer bg-transparent border-none outline-none"
+          >
+            Resume
+          </button>
+
           <Link
             href="/contact"
             className="text-[10px] font-bold tracking-[0.3em] uppercase text-slate-500 hover:text-white transition-all"
