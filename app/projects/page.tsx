@@ -9,7 +9,7 @@ interface Project {
   id: string;
   title: string;
   description: string;
-  isOngoing?: boolean; // Idinagdag para sa status check
+  isOngoing?: boolean;
 }
 
 export default function ProjectsPage() {
@@ -20,7 +20,8 @@ export default function ProjectsPage() {
     const fetchProjects = async () => {
       try {
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "";
-        const res = await fetch(`${baseUrl}/api/projects`);
+        // Sinisiguro nito na kinukuha ang pinakabagong data mula sa iyong API route
+        const res = await fetch(`${baseUrl}/api/projects`, { cache: 'no-store' });
         const data = await res.json();
         setProjects(data);
       } catch (error) {
@@ -74,6 +75,7 @@ export default function ProjectsPage() {
       >
         {projects.map((project, index) => (
           <motion.div key={project.id} variants={item}>
+            {/* TAMA NA LINK: Gagamitin nito ang id (e.g., brgy-system) para sa dynamic folder na [id] */}
             <Link
               href={`/projects/${project.id}`}
               className="group relative flex flex-col justify-between h-[350px] md:h-[400px] bg-[#030303] p-8 md:p-10 hover:bg-white/[0.02] transition-all duration-500"
@@ -84,7 +86,6 @@ export default function ProjectsPage() {
                     Index_0{index + 1}
                   </span>
                   
-                  {/* ONGOING INDICATOR */}
                   {project.isOngoing && (
                     <div className="flex items-center gap-2">
                       <span className="relative flex h-1.5 w-1.5">
