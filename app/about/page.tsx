@@ -3,7 +3,7 @@
 import { motion, Variants } from "framer-motion"; // Added Variants import
 import Link from "next/link";
 
-const skills = ["PHP", "Python", "MySQL", "React / Next.js", "C#", "ASP.NET", "Odoo ERP"];
+const skills = ["PHP", "React", "MySQL", "PostgreSQL", "Next.js", "C# / ASP.NET", "Odoo ERP"];
 
 export default function AboutPage() {
   // Added explicit Variants type to handle the custom cubic-bezier ease array
@@ -36,15 +36,15 @@ export default function AboutPage() {
           variants={FADE_UP}
           className="lg:col-span-7 space-y-6 md:space-y-8 border-l border-white/10 pl-6 md:pl-8"
         >
-          <p className="text-white text-lg md:text-2xl font-medium tracking-tight leading-snug">
-            Neil Russel is a web developer based in the Philippines, focused on the intersection of complex logic and minimalist design.
+          <p className="text-white text-base md:text-xl font-light tracking-wide leading-relaxed">
+            Neil Russel is a web developer based in the Philippines — building full-stack systems with Next.js, Directus, and MySQL.
           </p>
           <div className="space-y-4 md:space-y-6 text-[10px] md:text-[11px] uppercase tracking-[0.2em] leading-relaxed text-slate-500">
             <p>
-              EXPERIENCED IN BUILDING DYNAMIC, USER-CENTRIC WEBSITES AND ERP-INTEGRATED APPLICATIONS DURING MY TENURE AT DIREC BUSINESS TECHNOLOGIES INC.
+              Focused on ERP and C2C SaaS platforms — designing end-to-end web applications from database architecture to UI, with a strong emphasis on enterprise resource planning and business-critical workflows.
             </p>
             <p>
-              CURRENTLY SPECIALIZING IN C#, PHP, AND NEXT.JS WHILE MASTERING PYTHON AND FLASK TO SOLVE REAL-WORLD PROBLEMS WITH ARCHITECTURAL PRECISION.
+              Specializing in Next.js and Directus as a headless CMS/API layer, with MySQL and PostgreSQL as primary databases — delivering scalable, maintainable systems for real-world business operations.
             </p>
           </div>
         </motion.div>
