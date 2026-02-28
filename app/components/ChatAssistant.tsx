@@ -32,7 +32,7 @@ export default function ChatAssistant() {
               height: isMinimized ? "auto" : "500px"
             }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className={`w-[320px] sm:w-[380px] bg-[var(--background)] border border-[var(--border)]/20 rounded-xl overflow-hidden shadow-2xl flex flex-col mb-4 ${isMinimized ? "h-auto" : "h-[500px]"}`}
+            className={`w-[90vw] sm:w-[380px] bg-[var(--background)] border border-[var(--border)]/20 rounded-xl overflow-hidden shadow-2xl flex flex-col mb-4 ${isMinimized ? "h-auto" : "h-[500px]"}`}
           >
             {/* Header */}
             <div className="p-4 border-b border-[var(--border)]/10 bg-[var(--muted)]/30 flex justify-between items-center group">

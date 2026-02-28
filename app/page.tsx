@@ -31,7 +31,7 @@ export default function Home() {
         className="text-center w-full max-w-5xl"
       >
         <motion.p variants={FADE_UP} className="text-[9px] md:text-[10px] font-bold tracking-[0.4em] uppercase text-blue-600 dark:text-blue-500/80 mb-6">Web Developer</motion.p>
-        <motion.h1 variants={FADE_UP} className="text-5xl sm:text-7xl md:text-9xl font-black mb-8 leading-[0.85] tracking-tighter text-[var(--foreground)]">CRAFTING <br /> <span className="text-[var(--foreground)]/10 dark:text-[var(--foreground)]/20">DIGITAL.</span></motion.h1>
+        <motion.h1 variants={FADE_UP} className="text-4xl sm:text-7xl md:text-9xl font-black mb-8 leading-[0.85] tracking-tighter text-[var(--foreground)]">CRAFTING <br /> <span className="text-[var(--foreground)]/10 dark:text-[var(--foreground)]/20">DIGITAL.</span></motion.h1>
         <motion.p variants={FADE_UP} className="text-[var(--muted-foreground)] text-xs md:text-sm lg:text-base max-w-[280px] sm:max-w-sm mx-auto mb-12 uppercase">Designing cleaner spaces where <span className="text-[var(--foreground)] font-medium">logic meets aesthetics</span>.</motion.p>
 
         <motion.div variants={FADE_UP} className="flex flex-col sm:flex-row gap-8 sm:gap-12 justify-center items-center">

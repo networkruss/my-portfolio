@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { Menu, X as CloseIcon } from "lucide-react";
 
 const AnimatedBackground = dynamic(() => import("./components/AnimatedBackground"), { 
   ssr: false 
@@ -39,6 +40,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     const current = navItems.find(item => item.href === pathname);
     if (current) setActiveTab(current.name);
   }, [pathname]);
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
@@ -83,10 +86,64 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     </MagneticLink>
                   ))}
                 </div>
-                <ThemeToggle />
+                
+                <div className="flex items-center gap-4">
+                  <ThemeToggle />
+                  <button 
+                    onClick={() => setIsMenuOpen(true)}
+                    className="sm:hidden p-2 text-[var(--foreground)] hover:bg-[var(--muted)]/50 rounded-full transition-colors"
+                  >
+                    <Menu className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
             </div>
           </nav>
+
+          {/* Mobile Menu Overlay */}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, x: "100%" }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="fixed inset-0 z-[100] bg-[var(--background)] flex flex-col p-6 sm:hidden"
+              >
+                <div className="flex justify-between items-center mb-16">
+                  <span className="text-[10px] font-bold tracking-[0.5em] text-[var(--foreground)] uppercase italic">MENU</span>
+                  <button 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="p-2 text-[var(--foreground)]"
+                  >
+                    <CloseIcon className="w-6 h-6" />
+                  </button>
+                </div>
+
+                <div className="flex flex-col gap-8">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`text-4xl font-black tracking-tighter uppercase ${
+                        activeTab === item.name ? "text-blue-500" : "text-[var(--foreground)]"
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+
+                <div className="mt-auto border-t border-[var(--border)]/10 pt-8 flex justify-between items-center">
+                   <p className="text-[8px] tracking-[0.4em] uppercase text-[var(--muted-foreground)] opacity-60">
+                    © {new Date().getFullYear()} — N. RUSSEL
+                  </p>
+                  <ThemeToggle />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <AnimatePresence mode="wait">
             <motion.main 

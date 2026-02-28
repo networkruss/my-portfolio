@@ -54,7 +54,7 @@ export default function SkillsCloud() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full aspect-square md:aspect-video bg-[var(--muted)]/5 rounded-3xl border border-[var(--border)]/10 overflow-hidden flex items-center justify-center p-8 md:p-12"
+      className="relative w-full aspect-square md:aspect-video bg-[var(--muted)]/5 rounded-3xl border border-[var(--border)]/10 overflow-hidden flex items-center justify-center p-4 md:p-12"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 opacity-50" />
       
