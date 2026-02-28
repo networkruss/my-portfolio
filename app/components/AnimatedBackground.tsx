@@ -1,12 +1,21 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
 
 export default function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafRef = useRef<number | null>(null);
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
     let w = (canvas.width = window.innerWidth);
@@ -31,7 +40,7 @@ export default function AnimatedBackground() {
     };
 
     const particles: Particle[] = [];
-    const max = 40;
+    const max = 60; // Increased count for more density
 
     function createParticle() {
       const angle = Math.random() * Math.PI * 2;
@@ -45,21 +54,29 @@ export default function AnimatedBackground() {
         size: Math.random() * 15 + 2,
         rot: Math.random() * Math.PI * 2,
         vrot: (Math.random() - 0.5) * 0.01,
-        hue: 210,
+        hue: resolvedTheme === "dark" ? 210 : 220, // More vibrant blue for light mode
         life: 0,
-        maxLife: Math.random() * 15 + 10,
+        maxLife: Math.random() * 10 + 10,
       });
     }
 
     for (let i = 0; i < max; i++) createParticle();
 
     function render() {
-      ctx.fillStyle = "#030303";
+      // Use CSS variable for background color
+      const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--background').trim() || "#030303";
+      ctx.fillStyle = bgColor;
       ctx.fillRect(0, 0, w, h);
 
+      // Radial gradient for depth
       const grad = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, w/1.2);
-      grad.addColorStop(0, "rgba(3, 3, 3, 0)");
-      grad.addColorStop(1, "rgba(0, 0, 0, 0.8)");
+      if (resolvedTheme === "dark") {
+        grad.addColorStop(0, "rgba(3, 3, 3, 0)");
+        grad.addColorStop(1, "rgba(0, 0, 0, 0.4)");
+      } else {
+        grad.addColorStop(0, "rgba(255, 255, 255, 0)");
+        grad.addColorStop(1, "rgba(200, 220, 255, 0.05)"); // Subtle blue tint at edges
+      }
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
 
@@ -74,13 +91,15 @@ export default function AnimatedBackground() {
           createParticle();
         }
 
-        const alpha = Math.min(p.life, p.maxLife - p.life, 1) * 0.15;
+        const alpha = Math.min(p.life, p.maxLife - p.life, 1) * (resolvedTheme === "dark" ? 0.15 : 0.25); // Increased alpha for light mode
         ctx.save();
         ctx.translate(p.x, p.y);
         ctx.rotate(p.rot);
         ctx.beginPath();
         ctx.rect(-p.size/2, -p.size/2, p.size, p.size);
-        ctx.strokeStyle = `hsla(${p.hue}, 100%, 70%, ${alpha})`;
+        
+        const lightness = resolvedTheme === "dark" ? 70 : 50; // Darker and more visible in light mode
+        ctx.strokeStyle = `hsla(${p.hue}, 100%, ${lightness}%, ${alpha})`;
         ctx.lineWidth = 1;
         ctx.stroke();
         ctx.restore();
@@ -95,9 +114,12 @@ export default function AnimatedBackground() {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", updateSize);
     };
-  }, []);
+  }, [mounted, resolvedTheme]);
+
+  if (!mounted) return <div className="fixed inset-0 bg-[var(--background)] -z-10" />;
 
   return (
     <canvas ref={canvasRef} className="fixed inset-0 -z-10 pointer-events-none" />
   );
 }
+

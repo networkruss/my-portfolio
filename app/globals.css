@@ -1,15 +1,37 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    --background: #ffffff;
+    --background-alt: #f8fafc;
+    --foreground: #020617;
+    --muted: #f1f5f9;
+    --muted-foreground: #475569; /* Darker Slate for better readability */
+    --border: #e2e8f0;
+    --accent: #3b82f6;
+    --accent-foreground: #ffffff;
+  }
+
+  .dark {
+    --background: #030303;
+    --background-alt: #0a0a0a;
+    --foreground: #f8fafc;
+    --muted: #0f172a;
+    --muted-foreground: #94a3b8;
+    --border: #1e293b;
+    --accent: #3b82f6;
+    --accent-foreground: #ffffff;
+  }
+
   body {
-    /* Pure dark background for maximum contrast */
-    @apply bg-[#030303] text-slate-400 antialiased; 
+    @apply bg-[var(--background)] text-[var(--muted-foreground)] antialiased; 
+    transition: background-color 0.3s ease, color 0.3s ease;
     font-family: 'Inter', system-ui, sans-serif;
   }
 
   /* Sharp, clean typography without shadows */
   h1, h2, h3, p, span {
-    @apply tracking-tighter text-white;
+    @apply tracking-tighter text-[var(--foreground)];
     text-shadow: none; 
   }
 }
@@ -17,4 +39,18 @@
 /* Minimalist Glassmorphism: thinner borders, less opacity */
 .glass-panel {
   @apply bg-white/[0.01] border border-white/[0.05] backdrop-blur-lg;
+}
+
+.dark .glass-panel {
+    @apply bg-white/[0.01] border border-white/[0.05];
+}
+
+.light .glass-panel {
+    @apply bg-black/[0.01] border border-black/[0.05];
+}
+
+@media (min-width: 768px) {
+  * {
+    cursor: none !important;
+  }
 }

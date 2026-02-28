@@ -29,6 +29,9 @@ const projects = [
       "/screenshots/scm-planner/scm7.png",
     ] as string[],
     isOngoing: false,
+    challenge: "Ang Directus ay walang built-in 'view table' support para sa mga complex queries at computations. Nahirapan kaming i-render ang aggregated data sa interface.",
+    solution: "Nag-implement ako ng direct database connection at custom calculations. Ginamit ko ang formula na: (In-transit + Current Stock) - Expected Sell Out = Projected Stock para makuha ang tamang inventory levels.",
+    impact: "Na-automate ang replenishment computation na dati ay manual at prone sa errors, na nagresulta sa mas mabilis na procurement decisions."
   },
   {
     id: "sales-bia-report",
@@ -46,6 +49,9 @@ const projects = [
     ],
     screenshots: [] as string[],
     isOngoing: false,
+    challenge: "Magulo ang database structure kung saan maraming products ang may 'null' na parent_id, dahilan para magkaroon ng maling data relationships sa reports.",
+    solution: "Binago ko ang mapping logic: sa halip na umasa sa parent_id, ikinonekta ko ang bawat product directly sa kanilang respective suppliers para masiguro ang tamang data aggregation.",
+    impact: "Naging accurate ang sales reports at nawala ang discrepancies sa product categorization na dati ay nakakalito sa mga stakeholders."
   },
   {
     id: "bia-stock-health",
@@ -73,6 +79,9 @@ const projects = [
       "/screenshots/bia-stock-health/bia8.png",
     ] as string[],
     isOngoing: false,
+    challenge: "Ang pag-calculate ng Stock-out Risk at SLOB (Slow-Moving or Obsolete) inventory ay napakahirap at matagal gawin manually gamit ang spreadsheets.",
+    solution: "Nag-implement ako ng automated calculation engine na direktang humuhugot ng data mula sa ledger para i-compute ang inventory health metrics in real-time.",
+    impact: "Wala nang manual computation sa ledger; nabigyan ang warehouse teams ng proactive alerts para maagapan ang potential stock-outs."
   },
   {
     id: "purchase-order-system",
@@ -133,6 +142,9 @@ const projects = [
       "/screenshots/stock-transfer/stock4.png",
     ],
     isOngoing: true,
+    challenge: "Kailangan ng mabilis na paraan para makapag-transfer ng stock sa mga target branches nang hindi nagkakamali sa quantities.",
+    solution: "Ginamit ko ang RFID scanning capability para mabilis na ma-target ang mga branches at automated ang data validation bago ang transfer execution.",
+    impact: "Nabawasan ang inventory discrepancies sa pagitan ng mga branches at napabilis ang transfer process sa warehouse."
   },
   {
     id: "brgy-system",
@@ -150,6 +162,9 @@ const projects = [
     ],
     screenshots: [] as string[],
     isOngoing: true,
+    challenge: "Ang Barangay governance ay napaka-manual, mula sa pag-issue ng certificates hanggang sa pag-track ng resident profiles.",
+    solution: "Binuo ko ang system na ito para i-digitize ang manual paperwork at gumawa ng secured na central database gamit ang Next.js at PHP.",
+    impact: "Mas mabilis na nakaka-request ang mga residents ng certifications at mas maayos ang record-keeping ng local government."
   },
   {
     id: "pangasinan-ride",
@@ -167,6 +182,9 @@ const projects = [
     ],
     screenshots: [] as string[],
     isOngoing: true,
+    challenge: "Kulang sa access ang mga tao sa isang localized na platform para sa pag-renta ng vehicles at pakikipag-negotiate sa Pangasinan.",
+    solution: "Layunin kong tapusin ang platform na ito para magkaroon ng central hub kung saan ang mga car owners at renters ay madaling makatitingin ng listings at makakapag-negotiate nang maayos.",
+    impact: "Magbibigay ito ng digital solution para sa provincial transportation at rental needs ng mga taga-Pangasinan."
   },
   {
     id: "portfolio",
