@@ -24,14 +24,27 @@ export async function POST(req: Request) {
     };
 
     if (!apiKey) {
-      return new Response(JSON.stringify({ error: "Missing API Key" }), { status: 400 });
+      console.warn("DEBUG: Missing GOOGLE_GENERATIVE_AI_API_KEY. Falling back to Simulation Mode.");
+      const lastUserMessage = messages[messages.length - 1]?.content || "";
+      const simulatedText = getSimulationResponse(lastUserMessage);
+      
+      return new Response(
+        `0:"${simulatedText.replace(/"/g, '\\"')}"\n`,
+        { 
+          headers: { 
+            'Content-Type': 'text/plain; charset=utf-8',
+            'x-ai-simulation': 'true',
+            'x-ai-error': 'missing-key'
+          } 
+        }
+      );
     }
 
     const google = createGoogleGenerativeAI({ apiKey });
 
     try {
       const result = await streamText({
-        model: google("gemini-2.0-flash") as any, 
+        model: google("gemini-1.5-flash") as any, // Using 1.5-flash for broader compatibility, can be changed back to 2.0-flash
         system: `You are Russel AI, the digital twin of Neil Russel D. Soliven, a Full Stack Developer.
         Respond as Russel's AI assistant. Be professional and concise.`,
         messages,
@@ -40,19 +53,21 @@ export async function POST(req: Request) {
 
       return result.toDataStreamResponse();
     } catch (apiError: any) {
-      // Kapag Quota Exceeded (Limit 0), mag-fallback tayo sa Simulation para hindi sira ang UI
-      if (apiError.statusCode === 429 || apiError.message?.includes("quota")) {
-        console.warn("DEBUG: Quota exceeded. Switching to Simulation Mode.");
+      console.error("DEBUG: Chat API Error:", apiError);
+      
+      // Kapag Quota Exceeded (Limit 0) o iba pang API error, mag-fallback tayo sa Simulation
+      if (apiError.statusCode === 429 || apiError.message?.includes("quota") || apiError.statusCode === 403) {
+        console.warn("DEBUG: API Error or Quota exceeded. Switching to Simulation Mode.");
         const lastUserMessage = messages[messages.length - 1]?.content || "";
         const simulatedText = getSimulationResponse(lastUserMessage);
         
-        // Return a mock stream response that looks like the real thing
         return new Response(
           `0:"${simulatedText.replace(/"/g, '\\"')}"\n`,
           { 
             headers: { 
               'Content-Type': 'text/plain; charset=utf-8',
-              'x-ai-simulation': 'true' 
+              'x-ai-simulation': 'true',
+              'x-ai-error': apiError.message || 'api-error'
             } 
           }
         );

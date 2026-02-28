@@ -10,6 +10,7 @@ Set these in your `.env.local` for local testing and in your hosting provider (V
 - `GMAIL_PASS` — Gmail App Password (recommended, not your normal account password).
 - `NEXT_PUBLIC_BASE_URL` — Your site URL (e.g. `https://your-domain.com`). Used for client-side fetches if needed.
 - `NEXT_PUBLIC_FORMSPREE_PROJECT_ID` (recommended) — Formspree project/form ID for client-side use (example: `mdaojvoq`).
+- `GOOGLE_GENERATIVE_AI_API_KEY` — Your Google Gemini API key from [Google AI Studio](https://aistudio.google.com/).
 
 > Never commit secrets to the repository. Use Vercel's Environment Variables UI or your host's secret store.
 
