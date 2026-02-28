@@ -31,7 +31,7 @@ export async function POST(req: Request) {
 
     try {
       const result = await streamText({
-        model: google("gemini-2.0-flash"), 
+        model: google("gemini-2.0-flash") as any, 
         system: `You are Russel AI, the digital twin of Neil Russel D. Soliven, a Full Stack Developer.
         Respond as Russel's AI assistant. Be professional and concise.`,
         messages,

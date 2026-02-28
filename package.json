@@ -9,9 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@ai-sdk/google": "^3.0.33",
+    "@ai-sdk/google": "^3.0.34",
     "@formspree/react": "^3.0.0",
-    "ai": "^3.4.33",
+    "ai": "^6.0.105",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.26",
     "lenis": "^1.3.17",
