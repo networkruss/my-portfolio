@@ -48,9 +48,3 @@
 .light .glass-panel {
     @apply bg-black/[0.01] border border-black/[0.05];
 }
-
-@media (min-width: 768px) {
-  * {
-    cursor: none !important;
-  }
-}

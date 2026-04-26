@@ -4,6 +4,26 @@ export const dynamic = "force-dynamic";
 
 const projects = [
   {
+    id: "data-analytics-sql",
+    title: "Data Analytics & SQL",
+    description:
+      "A comprehensive Data Analytics and SQL portfolio showcasing various data exploration, cleaning, and visualization projects.",
+    details:
+      "This project highlights my expertise in SQL and Data Analytics. It includes data extraction, transformation, and interactive dashboard creation to derive actionable business insights.",
+    techStack: ["SQL", "Data Analytics", "Power BI", "Tableau", "Excel"],
+    features: [
+      "Data Cleaning and Processing",
+      "Advanced SQL Queries",
+      "Interactive Dashboards",
+      "Business Intelligence Analytics"
+    ],
+    screenshots: [
+      "/screenshots/sql-data-analytics/dashboard.png"
+    ] as string[],
+    isOngoing: false,
+    githubLink: "https://github.com/networkruss/SQL-Data-Analytics-Portfolio"
+  },
+  {
     id: "scm-planner",
     title: "SCM Planner",
     description:

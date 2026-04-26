@@ -17,15 +17,7 @@ interface Project {
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
-  const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
-  
-  // Mouse tracking for the peek effect
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  // Smooth spring for the following effect
-  const springX = useSpring(mouseX, { stiffness: 100, damping: 20 });
-  const springY = useSpring(mouseY, { stiffness: 100, damping: 20 });
+
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -43,10 +35,7 @@ export default function ProjectsPage() {
     fetchProjects();
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    mouseX.set(e.clientX);
-    mouseY.set(e.clientY);
-  };
+
 
   const container: Variants = {
     hidden: { opacity: 0 },
@@ -68,38 +57,7 @@ export default function ProjectsPage() {
   );
 
   return (
-    <div 
-      className="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 relative z-10 text-[var(--foreground)]"
-      onMouseMove={handleMouseMove}
-    >
-      {/* Floating Image Peek (Desktop Only) */}
-      <AnimatePresence>
-        {hoveredProject && hoveredProject.screenshots?.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            exit={{ opacity: 0, scale: 0.8, rotate: 5 }}
-            style={{ 
-              position: "fixed",
-              left: springX,
-              top: springY,
-              x: "-50%",
-              y: "-50%",
-              pointerEvents: "none",
-              zIndex: 100,
-            }}
-            className="hidden md:block w-72 h-48 rounded-lg overflow-hidden border border-blue-500/30 shadow-2xl shadow-blue-500/10"
-          >
-            <Image 
-              src={hoveredProject.screenshots[0]} 
-              alt={hoveredProject.title} 
-              fill 
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <div className="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 relative z-10 text-[var(--foreground)]">
 
       <motion.div 
         initial={{ opacity: 0, x: -10 }}
@@ -124,8 +82,6 @@ export default function ProjectsPage() {
           <motion.div 
             key={project.id} 
             variants={item}
-            onMouseEnter={() => setHoveredProject(project)}
-            onMouseLeave={() => setHoveredProject(null)}
           >
             <Link
               href={`/projects/${project.id}`}

@@ -19,6 +19,7 @@ interface Project {
   challenge?: string;
   solution?: string;
   impact?: string;
+  githubLink?: string;
 }
 
 export default function ProjectDetail() {
@@ -88,7 +89,7 @@ export default function ProjectDetail() {
             <motion.div
               initial={{ scale: 1.15 }}
               animate={{ scale: 1 }}
-              transition={{ duration: 15, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
               className="w-full h-full"
             >
               <img
@@ -180,9 +181,20 @@ export default function ProjectDetail() {
           <p className="text-[9px] font-bold tracking-[0.4em] uppercase text-[var(--muted-foreground)] dark:opacity-50 mb-6">
             Overview
           </p>
-          <p className="text-[var(--muted-foreground)] text-[12px] md:text-sm leading-relaxed tracking-wide font-medium max-w-3xl">
+          <p className="text-[var(--muted-foreground)] text-[12px] md:text-sm leading-relaxed tracking-wide font-medium max-w-3xl mb-8">
             {project.details}
           </p>
+          {project.githubLink && (
+            <a 
+              href={project.githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 rounded-sm shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5"
+            >
+              <ExternalLink className="w-4 h-4" />
+              View SQL Source
+            </a>
+          )}
         </section>
 
         {/* --- CASE STUDY SECTION --- */}

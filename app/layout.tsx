@@ -10,17 +10,7 @@ import { ThemeProvider } from "./components/ThemeProvider";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { Menu, X as CloseIcon } from "lucide-react";
 
-const AnimatedBackground = dynamic(() => import("./components/AnimatedBackground"), { 
-  ssr: false 
-});
 
-const ChatAssistant = dynamic(() => import("./components/ChatAssistant"), {
-  ssr: false
-});
-
-const LiquidCursor = dynamic(() => import("./components/LiquidCursor"), {
-  ssr: false
-});
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -45,17 +35,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className="font-sans min-h-screen flex flex-col antialiased bg-[var(--background)] text-[var(--muted-foreground)]">
+      <body className="font-sans min-h-screen flex flex-col antialiased bg-[var(--background)] text-[var(--muted-foreground)] cursor-auto">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
+          enableSystem={false}
           disableTransitionOnChange
         >
-          <LiquidCursor />
           {/* Background Layer Group */}
           <div className="fixed inset-0 z-[-1] pointer-events-none">
-            <AnimatedBackground />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--background)_100%)] opacity-40 dark:opacity-80" />
             <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
           </div>
@@ -158,7 +146,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </motion.main>
           </AnimatePresence>
 
-          <ChatAssistant />
 
           <footer className="py-20 border-t border-[var(--border)]/10 text-center">
             <p className="text-[9px] tracking-[0.4em] uppercase text-[var(--muted-foreground)] opacity-60">
