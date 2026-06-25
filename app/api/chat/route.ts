@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     const getSimulationResponse = (userMessage: string) => {
       const msg = userMessage.toLowerCase();
       if (msg.includes("projects") || msg.includes("gawa")) {
-        return "I have worked on several key projects like the **SCM Planner**, a **Stock Transfer Module** with RFID, and a **Brgy Management System**. Which one would you like to hear more about?";
+        return "I have worked on several key projects like the **SCM Planner**, a **Stock Transfer Module** with RFID, and a **Purchase Order System**. Which one would you like to hear more about?";
       }
       if (msg.includes("skills") || msg.includes("tech") || msg.includes("marunong")) {
         return "My core tech stack includes **Next.js**, **React**, **TypeScript**, and **Tailwind CSS** for the frontend. For the backend, I use **Node.js**, **Spring Boot**, and **PHP (Laravel/Odoo)**.";
@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     } catch (apiError: any) {
       console.error("DEBUG: Chat API Error:", apiError);
       
-      // Kapag Quota Exceeded (Limit 0) o iba pang API error, mag-fallback tayo sa Simulation
+      // If Quota Exceeded (Limit 0) or other API errors occur, fall back to Simulation Mode.
       if (apiError.statusCode === 429 || apiError.message?.includes("quota") || apiError.statusCode === 403) {
         console.warn("DEBUG: API Error or Quota exceeded. Switching to Simulation Mode.");
         const lastUserMessage = messages[messages.length - 1]?.content || "";

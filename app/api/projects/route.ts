@@ -49,29 +49,9 @@ const projects = [
       "/screenshots/scm-planner/scm7.png",
     ] as string[],
     isOngoing: false,
-    challenge: "Ang Directus ay walang built-in 'view table' support para sa mga complex queries at computations. Nahirapan kaming i-render ang aggregated data sa interface.",
-    solution: "Nag-implement ako ng direct database connection at custom calculations. Ginamit ko ang formula na: (In-transit + Current Stock) - Expected Sell Out = Projected Stock para makuha ang tamang inventory levels.",
-    impact: "Na-automate ang replenishment computation na dati ay manual at prone sa errors, na nagresulta sa mas mabilis na procurement decisions."
-  },
-  {
-    id: "sales-bia-report",
-    title: "Sales BIA Report",
-    description:
-      "A business intelligence analytics dashboard for real-time sales performance monitoring and reporting.",
-    details:
-      "The Sales BIA Report module delivers dynamic sales analytics to business users. It aggregates transactional data and presents it through interactive visualizations — giving teams instant visibility into revenue trends, top products, and performance vs. targets.",
-    techStack: ["Next.js", "TypeScript", "Spring Boot", "Directus", "MySQL"],
-    features: [
-      "Sales Performance Dashboard",
-      "KPI Tracking",
-      "Data Visualization",
-      "Filterable Reports",
-    ],
-    screenshots: [] as string[],
-    isOngoing: false,
-    challenge: "Magulo ang database structure kung saan maraming products ang may 'null' na parent_id, dahilan para magkaroon ng maling data relationships sa reports.",
-    solution: "Binago ko ang mapping logic: sa halip na umasa sa parent_id, ikinonekta ko ang bawat product directly sa kanilang respective suppliers para masiguro ang tamang data aggregation.",
-    impact: "Naging accurate ang sales reports at nawala ang discrepancies sa product categorization na dati ay nakakalito sa mga stakeholders."
+    challenge: "Directus lacks built-in 'view table' support for complex queries and computations, making it difficult to render aggregated data in the user interface.",
+    solution: "I implemented a direct database connection and custom calculations, using the formula: (In-transit + Current Stock) - Expected Sell Out = Projected Stock to compute the correct inventory levels.",
+    impact: "Automated the replenishment computation which was previously manual and error-prone, resulting in faster procurement decisions."
   },
   {
     id: "bia-stock-health",
@@ -99,9 +79,9 @@ const projects = [
       "/screenshots/bia-stock-health/bia8.png",
     ] as string[],
     isOngoing: false,
-    challenge: "Ang pag-calculate ng Stock-out Risk at SLOB (Slow-Moving or Obsolete) inventory ay napakahirap at matagal gawin manually gamit ang spreadsheets.",
-    solution: "Nag-implement ako ng automated calculation engine na direktang humuhugot ng data mula sa ledger para i-compute ang inventory health metrics in real-time.",
-    impact: "Wala nang manual computation sa ledger; nabigyan ang warehouse teams ng proactive alerts para maagapan ang potential stock-outs."
+    challenge: "Calculating Stock-out Risk and SLOB (Slow-Moving or Obsolete) inventory manually using spreadsheets was extremely difficult and time-consuming.",
+    solution: "I implemented an automated calculation engine that pulls data directly from the ledger to compute inventory health metrics in real time.",
+    impact: "Eliminated manual ledger calculations and provided warehouse teams with proactive alerts to prevent potential stock-outs."
   },
   {
     id: "purchase-order-system",
@@ -134,7 +114,6 @@ const projects = [
       "/screenshots/purchase-order-system/c15.png",
       "/screenshots/purchase-order-system/c16.png",
       "/screenshots/purchase-order-system/c20.png",
-
     ] as string[],
     isOngoing: false,
   },
@@ -161,67 +140,10 @@ const projects = [
       "/screenshots/stock-transfer/stock3.png",
       "/screenshots/stock-transfer/stock4.png",
     ],
-    isOngoing: true,
-    challenge: "Kailangan ng mabilis na paraan para makapag-transfer ng stock sa mga target branches nang hindi nagkakamali sa quantities.",
-    solution: "Ginamit ko ang RFID scanning capability para mabilis na ma-target ang mga branches at automated ang data validation bago ang transfer execution.",
-    impact: "Nabawasan ang inventory discrepancies sa pagitan ng mga branches at napabilis ang transfer process sa warehouse."
-  },
-  {
-    id: "brgy-system",
-    title: "Brgy Management System",
-    description:
-      "A digital governance platform for local barangays to manage residents and certifications.",
-    details:
-      "This system is designed to automate the manual processing of barangay certificates and resident record-keeping. It features a secure database and an intuitive dashboard for local officials to track requests in real-time.",
-    techStack: ["PHP", "MySQL", "Tailwind CSS", "Next.js", "React Native"],
-    features: [
-      "Resident Profiling",
-      "Automated Certification",
-      "Incident Reporting",
-      "Data Encryption",
-    ],
-    screenshots: [] as string[],
-    isOngoing: true,
-    challenge: "Ang Barangay governance ay napaka-manual, mula sa pag-issue ng certificates hanggang sa pag-track ng resident profiles.",
-    solution: "Binuo ko ang system na ito para i-digitize ang manual paperwork at gumawa ng secured na central database gamit ang Next.js at PHP.",
-    impact: "Mas mabilis na nakaka-request ang mga residents ng certifications at mas maayos ang record-keeping ng local government."
-  },
-  {
-    id: "pangasinan-ride",
-    title: "Pangasinan Ride",
-    description:
-      "A localized transport-hailing and delivery application tailored for the province of Pangasinan.",
-    details:
-      "Pangasinan Ride aims to bridge the gap between local drivers and commuters. The project involves building a custom mapping logic and fare calculation based on provincial regulations.",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn/ui", "PostgreSQL", "React Native"],
-    features: [
-      "Real-time Tracking",
-      "Dynamic Fare Calculation",
-      "Driver Verification",
-      "SMS Notifications",
-    ],
-    screenshots: [] as string[],
-    isOngoing: true,
-    challenge: "Kulang sa access ang mga tao sa isang localized na platform para sa pag-renta ng vehicles at pakikipag-negotiate sa Pangasinan.",
-    solution: "Layunin kong tapusin ang platform na ito para magkaroon ng central hub kung saan ang mga car owners at renters ay madaling makatitingin ng listings at makakapag-negotiate nang maayos.",
-    impact: "Magbibigay ito ng digital solution para sa provincial transportation at rental needs ng mga taga-Pangasinan."
-  },
-  {
-    id: "portfolio",
-    title: "Portfolio Website",
-    description:
-      "A modern minimalist portfolio website built with Next.js, TypeScript, and Framer Motion.",
-    details:
-      "A high-performance personal website focused on editorial design, smooth animations, and optimized mobile experience.",
-    techStack: ["Next.js", "TypeScript", "Framer Motion", "Tailwind CSS"],
-    features: [
-      "Dynamic Routing",
-      "Screenshot Gallery",
-      "Resume Viewer",
-      "Mobile-First Design",
-    ],
-    screenshots: [] as string[],
     isOngoing: false,
+    challenge: "A fast and error-free method was needed to transfer stock to target branches without volume errors.",
+    solution: "I utilized RFID scanning capability to rapidly target branches and automated data validation prior to executing transfers.",
+    impact: "Reduced inventory discrepancies between branches and accelerated the warehouse transfer process."
   },
 ];
 

@@ -2,18 +2,18 @@
 
 import { motion, Variants } from "framer-motion";
 import { useForm, ValidationError } from "@formspree/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 
 export default function ContactPage() {
   const [state, handleSubmit] = useForm("mdaojvoq");
 
   const FADE_UP: Variants = {
-    hidden: { opacity: 0, y: 10 },
+    hidden: { opacity: 0, y: 12 },
     show: { 
       opacity: 1, 
       y: 0, 
       transition: { 
-        duration: 0.8, 
+        duration: 0.6, 
         ease: [0.16, 1, 0.3, 1] 
       } 
     },
@@ -21,67 +21,154 @@ export default function ContactPage() {
 
   if (state.succeeded) {
     return (
-      <div className="min-h-[70vh] flex items-center justify-center px-6">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center">
-          <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-4 uppercase text-[var(--foreground)]">Received.</h2>
-          <p className="text-[9px] md:text-[10px] tracking-[0.3em] text-[var(--muted-foreground)] uppercase">I will get back to you shortly.</p>
+      <div className="min-h-[60vh] flex items-center justify-center px-6">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-3">
+          <h2 className="text-3xl md:text-4xl font-serif font-light text-[var(--foreground)]">Received.</h2>
+          <p className="text-xs text-[var(--muted-foreground)] font-sans uppercase tracking-widest">I will get back to you shortly.</p>
         </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 relative z-10">
-      <motion.div initial="hidden" animate="show" variants={FADE_UP} className="mb-12 md:mb-20">
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-[var(--foreground)]">
-          Get in <br /> <span className="text-[var(--foreground)]/10 dark:text-[var(--foreground)]/20">Touch.</span>
+    <div className="max-w-4xl mx-auto px-6 md:px-8 py-12 md:py-20 relative z-10 text-[var(--foreground)]">
+      
+      {/* Page Header */}
+      <motion.div
+        initial="hidden"
+        animate="show"
+        variants={FADE_UP}
+        className="mb-16 border-b border-[var(--border)] pb-8"
+      >
+        <span className="text-xs font-bold tracking-[0.2em] text-[var(--muted-foreground)] uppercase block mb-3 font-sans">
+          CONTACT
+        </span>
+        <h1 className="text-4xl md:text-5xl font-serif font-light leading-tight text-[var(--foreground)] mb-4">
+          Get in Touch
         </h1>
+        <p className="text-sm md:text-base text-[var(--muted-foreground)] font-sans max-w-2xl leading-relaxed">
+          Let's discuss new projects, collaboration opportunities, or general inquiries.
+        </p>
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-        {/* Contact Links */}
-        <motion.div initial="hidden" animate="show" variants={FADE_UP} className="lg:col-span-4 space-y-10 md:space-y-12">
-          <div>
-            <h3 className="text-[9px] md:text-[10px] font-bold tracking-[0.4em] text-[var(--muted-foreground)] dark:text-[var(--muted-foreground)]/60 uppercase mb-4">Email</h3>
-            <a href="mailto:soliven.neilrussel.d@gmail.com" className="text-xs md:text-sm font-medium text-[var(--foreground)] hover:text-blue-600 dark:hover:text-blue-500 transition-colors uppercase tracking-wider break-all">
+        
+        {/* Left Side: Contact Links */}
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={FADE_UP}
+          className="lg:col-span-4 space-y-8 font-sans"
+        >
+          {/* Email Block */}
+          <div className="space-y-2">
+            <h3 className="text-xs font-bold tracking-[0.2em] text-[var(--muted-foreground)] uppercase">
+              EMAIL
+            </h3>
+            <a
+              href="mailto:soliven.neilrussel.d@gmail.com"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--foreground)] hover:opacity-80 transition-opacity"
+            >
               soliven.neilrussel.d@gmail.com
             </a>
           </div>
-          <div>
-            <h3 className="text-[9px] md:text-[10px] font-bold tracking-[0.4em] text-[var(--muted-foreground)] dark:text-[var(--muted-foreground)]/60 uppercase mb-4">Social</h3>
-            <div className="flex flex-row lg:flex-col gap-8 lg:gap-3">
-              <a href="https://github.com/networkruss" target="_blank" rel="noopener noreferrer" className="text-[10px] font-black tracking-widest uppercase text-[var(--foreground)] hover:text-blue-600 dark:hover:text-blue-500 transition-colors">GitHub</a>
-              <a href="https://www.linkedin.com/in/nrsoliven/" target="_blank" rel="noopener noreferrer" className="text-[10px] font-black tracking-widest uppercase text-[var(--foreground)] hover:text-blue-600 dark:hover:text-blue-500 transition-colors">LinkedIn</a>
+
+          {/* Social Block */}
+          <div className="space-y-2">
+            <h3 className="text-xs font-bold tracking-[0.2em] text-[var(--muted-foreground)] uppercase">
+              SOCIALS
+            </h3>
+            <div className="flex flex-col gap-2.5">
+              <a
+                href="https://github.com/networkruss"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--foreground)] hover:opacity-80 transition-opacity"
+              >
+                GitHub ↗
+              </a>
+              <a
+                href="https://www.linkedin.com/in/nrsoliven/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--foreground)] hover:opacity-80 transition-opacity"
+              >
+                LinkedIn ↗
+              </a>
             </div>
           </div>
         </motion.div>
 
-        {/* Minimal Form */}
-        <motion.div initial="hidden" animate="show" variants={FADE_UP} className="lg:col-span-8">
-          <form onSubmit={handleSubmit} className="space-y-10 md:space-y-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
-              <div className="group border-b border-[var(--border)]/20 focus-within:border-blue-500 transition-all py-2">
-                <label htmlFor="name" className="text-[8px] md:text-[9px] font-bold tracking-[0.4em] text-[var(--muted-foreground)] uppercase">Name</label>
-                <input id="name" type="text" name="name" required className="w-full bg-transparent border-none text-[var(--foreground)] focus:outline-none pt-4 uppercase text-[10px] md:text-xs tracking-widest" placeholder="Full Name" />
+        {/* Right Side: Formspree Contact Form */}
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={FADE_UP}
+          className="lg:col-span-8"
+        >
+          <form onSubmit={handleSubmit} className="space-y-8">
+            
+            {/* Name and Email inputs */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-xs font-bold tracking-[0.2em] text-[var(--muted-foreground)] uppercase">
+                  NAME
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  required
+                  className="w-full bg-[var(--background-alt)] border border-[var(--border)] focus:border-[var(--foreground)] transition-colors rounded-sm px-4 py-3 text-sm focus:outline-none text-[var(--foreground)]"
+                  placeholder="Your name"
+                />
               </div>
-              <div className="group border-b border-[var(--border)]/20 focus-within:border-blue-500 transition-all py-2">
-                <label htmlFor="email" className="text-[8px] md:text-[9px] font-bold tracking-[0.4em] text-[var(--muted-foreground)] uppercase">Email</label>
-                <input id="email" type="email" name="email" required className="w-full bg-transparent border-none text-[var(--foreground)] focus:outline-none pt-4 uppercase text-[10px] md:text-xs tracking-widest" placeholder="Email Address" />
+
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-xs font-bold tracking-[0.2em] text-[var(--muted-foreground)] uppercase">
+                  EMAIL ADDRESS
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  required
+                  className="w-full bg-[var(--background-alt)] border border-[var(--border)] focus:border-[var(--foreground)] transition-colors rounded-sm px-4 py-3 text-sm focus:outline-none text-[var(--foreground)]"
+                  placeholder="your.email@example.com"
+                />
                 <ValidationError prefix="Email" field="email" errors={state.errors} />
               </div>
             </div>
-            <div className="group border-b border-[var(--border)]/20 focus-within:border-blue-500 transition-all py-2">
-              <label htmlFor="message" className="text-[8px] md:text-[9px] font-bold tracking-[0.4em] text-[var(--muted-foreground)] uppercase">Message</label>
-              <textarea id="message" name="message" required rows={4} className="w-full bg-transparent border-none text-[var(--foreground)] focus:outline-none pt-4 uppercase text-[10px] md:text-xs tracking-widest resize-none" placeholder="How can I help you?"></textarea>
+
+            {/* Message input */}
+            <div className="space-y-2">
+              <label htmlFor="message" className="text-xs font-bold tracking-[0.2em] text-[var(--muted-foreground)] uppercase">
+                MESSAGE
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows={5}
+                className="w-full bg-[var(--background-alt)] border border-[var(--border)] focus:border-[var(--foreground)] transition-colors rounded-sm px-4 py-3 text-sm focus:outline-none text-[var(--foreground)] resize-none"
+                placeholder="How can I help you?"
+              />
               <ValidationError prefix="Message" field="message" errors={state.errors} />
             </div>
 
-            <button type="submit" disabled={state.submitting} className="group flex items-center gap-4 text-[10px] font-bold tracking-[0.5em] uppercase text-[var(--foreground)] hover:text-blue-500 transition-all py-4">
-              {state.submitting ? "Sending..." : "[ Send Message ]"}
-              {!state.submitting && <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />}
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={state.submitting}
+              className="inline-flex items-center justify-center px-6 py-3.5 bg-[var(--foreground)] text-[var(--background)] hover:opacity-90 transition-opacity font-sans text-xs md:text-sm font-semibold tracking-wide rounded-sm group shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {state.submitting ? "Sending..." : "Send Message"}
+              {!state.submitting && <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />}
             </button>
+
           </form>
         </motion.div>
+
       </div>
     </div>
   );

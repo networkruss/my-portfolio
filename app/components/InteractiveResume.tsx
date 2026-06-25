@@ -56,7 +56,7 @@ export default function InteractiveResume() {
             <div className="space-y-12">
               <div className="relative pl-8 border-l border-[var(--border)]/10">
                 <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-blue-500 rounded-full" />
-                <span className="text-[9px] font-black tracking-widest text-blue-500 uppercase block mb-2">2024 — Present</span>
+                <span className="text-[9px] font-black tracking-widest text-blue-500 uppercase block mb-2">2026 — Present</span>
                 <h4 className="text-base font-black tracking-tight text-[var(--foreground)] uppercase mb-2">Full Stack Developer / Solutions Architect</h4>
                 <p className="text-[11px] font-medium leading-[1.8] text-[var(--muted-foreground)] uppercase tracking-wider">
                   Specialized in architecting supply chain solutions. Built the **SCM Planner** engine using Directus and MySQL, streamlining replenishment operations for high-volume inventory.
@@ -65,7 +65,7 @@ export default function InteractiveResume() {
 
               <div className="relative pl-8 border-l border-[var(--border)]/10">
                 <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-[var(--muted-foreground)]/30 rounded-full" />
-                <span className="text-[9px] font-black tracking-widest text-[var(--muted-foreground)] opacity-50 uppercase block mb-2">2024 — Mid</span>
+                <span className="text-[9px] font-black tracking-widest text-[var(--muted-foreground)] opacity-50 uppercase block mb-2">2026 — Mid</span>
                 <h4 className="text-base font-black tracking-tight text-[var(--foreground)] uppercase mb-2">Junior Web Developer (Internship/Projects)</h4>
                 <p className="text-[11px] font-medium leading-[1.8] text-[var(--muted-foreground)] uppercase tracking-wider">
                   Developed automated reporting tools and stock health monitors. Focused on data visualization and real-time dashboard performance using Spring Boot.

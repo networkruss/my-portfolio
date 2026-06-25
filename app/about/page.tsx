@@ -2,99 +2,209 @@
 
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
-import SkillsCloud from "../components/SkillsCloud";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
-// Ang skills list ay nasa loob na ng SkillsCloud.tsx component.
+// Expertise data structured as 3-column categories matching the reference design
+const expertise = {
+  Frontend: [
+    "React / Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Shadcn/ui",
+    "Framer Motion",
+  ],
+  Backend: [
+    "Node.js",
+    "Spring Boot",
+    "Directus CMS",
+    "MySQL / PostgreSQL",
+    "REST APIs",
+  ],
+  Process: [
+    "Database Architecture",
+    "ERP Systems Design",
+    "Headless CMS Strategy",
+    "Inventory Modeling",
+    "Agile Development",
+  ],
+};
 
 export default function AboutPage() {
   const FADE_UP: Variants = {
-    hidden: { opacity: 0, y: 10 },
+    hidden: { opacity: 0, y: 12 },
     show: { 
       opacity: 1, 
       y: 0, 
       transition: { 
-        duration: 0.8, 
+        duration: 0.6, 
         ease: [0.16, 1, 0.3, 1] 
       } 
     },
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 relative z-10">
-      <motion.div initial="hidden" animate="show" variants={FADE_UP} className="mb-12 md:mb-20">
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-[var(--foreground)]">
-          The <br /> <span className="text-[var(--foreground)]/10 dark:text-[var(--foreground)]/20">Developer.</span>
+    <div className="max-w-4xl mx-auto px-6 md:px-8 py-12 md:py-20 relative z-10 text-[var(--foreground)]">
+      
+      {/* Page Header */}
+      <motion.div
+        initial="hidden"
+        animate="show"
+        variants={FADE_UP}
+        className="mb-16 border-b border-[var(--border)] pb-8"
+      >
+        <span className="text-xs font-bold tracking-[0.2em] text-[var(--muted-foreground)] uppercase block mb-3 font-sans">
+          ABOUT
+        </span>
+        <h1 className="text-4xl md:text-5xl font-serif font-light leading-tight text-[var(--foreground)] mb-4">
+          The Developer
         </h1>
+        <p className="text-sm md:text-base text-[var(--muted-foreground)] font-sans max-w-2xl leading-relaxed">
+          Neil Russel Soliven — Web Developer & Systems Engineer based in the Philippines.
+        </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-        {/* Narrative Section */}
-        <motion.div 
-          initial="hidden" 
-          whileInView="show" 
-          viewport={{ once: true }} 
+      {/* Main Grid Content */}
+      <div className="space-y-16">
+        
+        {/* Narrative bio section with profile picture */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
           variants={FADE_UP}
-          className="lg:col-span-12 space-y-16"
+          className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start"
         >
-          <div className="space-y-6 md:space-y-8 border-l border-[var(--border)]/10 pl-6 md:pl-8">
-            <p className="text-[var(--foreground)] text-base md:text-xl font-light tracking-wide leading-relaxed lg:max-w-4xl">
-              Neil Russel is a web developer based in the Philippines — building full-stack systems with Next.js, Directus, and MySQL.
+          <div className="space-y-6 md:col-span-8">
+            <p className="text-lg md:text-xl font-serif font-light leading-relaxed text-[var(--foreground)]">
+              I specialize in architecting full-stack systems with Next.js, Directus, and MySQL/PostgreSQL, bridging the gap between complex database operations and client-facing web applications.
             </p>
-            <div className="space-y-4 md:space-y-6 text-[10px] md:text-[11px] uppercase tracking-[0.2em] leading-relaxed text-[var(--muted-foreground)] lg:max-w-3xl">
+            <div className="space-y-4 text-sm leading-relaxed text-[var(--muted-foreground)] font-sans">
               <p>
-                Focused on ERP and C2C SaaS platforms — designing end-to-end web applications from database architecture to UI, with a strong emphasis on enterprise resource planning and business-critical workflows.
+                My work focuses heavily on developing custom enterprise resource planning (ERP) modules, workflow automation engines, and inventory management systems. I approach development with a core emphasis on structural clean code, robust schema design, and seamless user experience.
               </p>
               <p>
-                Specializing in Next.js and Directus as a headless CMS/API layer, with MySQL and PostgreSQL as primary databases — delivering scalable, maintainable systems for real-world business operations.
+                By utilizing headless CMS API layers like Directus alongside modern database instances, I design and deploy flexible, high-performance architectures that scale efficiently to solve real-world business challenges.
               </p>
             </div>
           </div>
-
-          {/* EXPERIENCE SECTION */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-            <div className="md:col-span-4">
-              <h3 className="text-[9px] md:text-[10px] font-bold tracking-[0.4em] text-[var(--foreground)] uppercase opacity-50 dark:opacity-30">Experience_Log</h3>
-            </div>
-            <div className="md:col-span-8 space-y-12">
-              <div className="group relative">
-                <span className="text-[8px] font-bold tracking-widest text-blue-500 uppercase block mb-2">2024 — Present</span>
-                <h4 className="text-sm md:text-base font-black tracking-tight text-[var(--foreground)] uppercase mb-2">Web Developer / Full Stack</h4>
-                <p className="text-[10px] md:text-[11px] uppercase tracking-widest leading-relaxed text-[var(--muted-foreground)]">
-                  Developing enterprise-scale ERP modules, including the SCM Planner and BIA Stock Health Monitor. Architecting headless CMS solutions and complex database operations.
-                </p>
-              </div>
-
-              <div className="group relative">
-                <span className="text-[8px] font-bold tracking-widest text-[var(--muted-foreground)] opacity-50 uppercase block mb-2">Ongoing Development</span>
-                <h4 className="text-sm md:text-base font-black tracking-tight text-[var(--foreground)] uppercase mb-2">Founder & Lead Dev @ Pangasinan Ride</h4>
-                <p className="text-[10px] md:text-[11px] uppercase tracking-widest leading-relaxed text-[var(--muted-foreground)]">
-                  Building a localized transport-hailing platform to solve rental negotiation gaps in the province. Implementing real-time tracking and mapping.
-                </p>
-              </div>
+          
+          {/* Profile Picture */}
+          <div className="md:col-span-4 flex justify-center">
+            <div className="relative w-full max-w-[260px] aspect-[3/4] rounded-sm overflow-hidden border border-[var(--border)] bg-[var(--background-alt)] group">
+              <img
+                src="/profile.jpg"
+                alt="Neil Russel Soliven"
+                className="w-full h-full object-cover grayscale-[0.1] hover:grayscale-0 transition-all duration-500"
+              />
             </div>
           </div>
         </motion.div>
 
-        {/* Technical Stack (Removed grid constraints for full-width) */}
-        <motion.div 
-          initial="hidden" 
-          whileInView="show" 
-          viewport={{ once: true }} 
+        {/* Experience Log Table Section */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
           variants={FADE_UP}
-          className="lg:col-span-12 mt-12"
+          className="border-t border-[var(--border)] pt-12"
         >
-          <div className="border-t border-[var(--border)]/10 pt-16">
-            <h3 className="text-[9px] md:text-[10px] font-bold tracking-[0.4em] text-[var(--foreground)] uppercase mb-8 opacity-50 dark:opacity-30 text-center">Technical Core</h3>
-            <SkillsCloud />
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+            <div className="md:col-span-4">
+              <h3 className="text-xs font-bold tracking-[0.2em] text-[var(--muted-foreground)] uppercase">
+                EXPERIENCE LOG
+              </h3>
+            </div>
+            <div className="md:col-span-8 divide-y divide-[var(--border)]">
+              
+              {/* Exp 1 */}
+              <div className="py-6 first:pt-0 last:pb-0 space-y-2">
+                <span className="text-xs font-semibold text-[var(--foreground)] block">
+                  2026 — Present
+                </span>
+                <h4 className="text-base font-semibold text-[var(--foreground)]">
+                  Web Developer / Full Stack
+                </h4>
+                <p className="text-sm text-[var(--muted-foreground)] font-sans leading-relaxed">
+                  Developing enterprise-scale ERP modules, including the SCM Planner and BIA Stock Health Monitor. Architecting headless CMS solutions, complex direct database query connections, and live forecast simulators.
+                </p>
+              </div>
+
+              {/* Exp 2 */}
+              <div className="py-6 first:pt-0 last:pb-0 space-y-2">
+                <span className="text-xs font-semibold text-[var(--foreground)] block">
+                  2026
+                </span>
+                <h4 className="text-base font-semibold text-[var(--foreground)]">
+                  Full Stack Developer — ERP & Internal Tools
+                </h4>
+                <p className="text-sm text-[var(--muted-foreground)] font-sans leading-relaxed">
+                  Built end-to-end Purchase Order workflows, barcode/RFID-driven Stock Transfer modules, and real-time inventory dashboards for warehouse and branch operations.
+                </p>
+              </div>
+
+            </div>
           </div>
         </motion.div>
-      </div>
 
-      <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={FADE_UP} className="mt-16 md:mt-24">
-        <Link href="/projects" className="text-[10px] font-bold tracking-[0.4em] uppercase text-[var(--foreground)] border-b border-[var(--border)] pb-1 hover:border-blue-500 transition-all">
-          [ Explore Portfolio ]
-        </Link>
-      </motion.div>
+        {/* Expertise Section — Clean 3-column grid matching reference */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={FADE_UP}
+          className="border-t border-[var(--border)] pt-12"
+        >
+          <h3 className="text-xs font-bold tracking-[0.2em] text-[var(--muted-foreground)] uppercase mb-10">
+            EXPERTISE
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 md:gap-16">
+            {Object.entries(expertise).map(([category, skills]) => (
+              <div key={category} className="space-y-4">
+                <h4 className="text-base font-serif font-semibold text-[var(--foreground)]">
+                  {category}
+                </h4>
+                <ul className="space-y-2.5">
+                  {skills.map((skill) => (
+                    <li
+                      key={skill}
+                      className="text-sm text-[var(--muted-foreground)] font-sans leading-normal"
+                    >
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* CTA Buttons — Get in touch + Download CV */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={FADE_UP}
+          className="pt-8 border-t border-[var(--border)] flex flex-wrap items-center gap-4"
+        >
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center px-6 py-3.5 bg-[var(--foreground)] text-[var(--background)] hover:opacity-90 transition-opacity font-sans text-xs md:text-sm font-semibold tracking-wide rounded-sm group shadow-sm"
+          >
+            Get in touch
+            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+          </Link>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-6 py-3.5 bg-transparent border border-[var(--border)] text-[var(--foreground)] hover:bg-[var(--background-alt)] transition-all font-sans text-xs md:text-sm font-semibold tracking-wide rounded-sm group"
+          >
+            Download CV
+            <ArrowUpRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+        </motion.div>
+        
+      </div>
     </div>
   );
 }

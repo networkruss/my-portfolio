@@ -1,50 +1,65 @@
 @import "tailwindcss";
 
+@theme {
+  --font-serif: var(--font-serif), Georgia, serif;
+  --font-sans: var(--font-sans), "Inter", system-ui, sans-serif;
+}
+
 @layer base {
   :root {
-    --background: #ffffff;
-    --background-alt: #f8fafc;
-    --foreground: #020617;
-    --muted: #f1f5f9;
-    --muted-foreground: #475569; /* Darker Slate for better readability */
-    --border: #e2e8f0;
-    --accent: #3b82f6;
-    --accent-foreground: #ffffff;
+    --background: #FAF8F5; /* warm off-white cream */
+    --background-alt: #F3EFE9; /* slightly darker cream for cards and buttons */
+    --foreground: #1A1A1A; /* deep charcoal text */
+    --muted: #EFECE6;
+    --muted-foreground: #706E6A; /* warm muted grey */
+    --border: #E5E2DC; /* subtle border */
+    --accent: #1A1A1A;
+    --accent-foreground: #FAF8F5;
   }
 
   .dark {
-    --background: #030303;
-    --background-alt: #0a0a0a;
-    --foreground: #f8fafc;
-    --muted: #0f172a;
-    --muted-foreground: #94a3b8;
-    --border: #1e293b;
-    --accent: #3b82f6;
-    --accent-foreground: #ffffff;
+    --background: #121211; /* warm black/dark charcoal */
+    --background-alt: #1C1C1A; /* slightly lighter card background */
+    --foreground: #FAF8F5; /* cream white text */
+    --muted: #1C1C1A;
+    --muted-foreground: #9A9790; /* muted warm grey */
+    --border: #2C2C2A; /* dark subtle border */
+    --accent: #FAF8F5;
+    --accent-foreground: #121211;
   }
 
   body {
-    @apply bg-[var(--background)] text-[var(--muted-foreground)] antialiased; 
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     transition: background-color 0.3s ease, color 0.3s ease;
-    font-family: 'Inter', system-ui, sans-serif;
   }
 
   /* Sharp, clean typography without shadows */
-  h1, h2, h3, p, span {
-    @apply tracking-tighter text-[var(--foreground)];
-    text-shadow: none; 
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--foreground);
+    letter-spacing: -0.025em;
+  }
+  
+  p, span, a {
+    color: var(--muted-foreground);
+  }
+  
+  strong {
+    color: var(--foreground);
+    font-weight: 600;
   }
 }
 
-/* Minimalist Glassmorphism: thinner borders, less opacity */
+/* Custom styles for cards & widgets to override standard glassmorphism */
 .glass-panel {
-  @apply bg-white/[0.01] border border-white/[0.05] backdrop-blur-lg;
+  background-color: var(--background-alt);
+  border: 1px solid var(--border);
 }
 
 .dark .glass-panel {
-    @apply bg-white/[0.01] border border-white/[0.05];
-}
-
-.light .glass-panel {
-    @apply bg-black/[0.01] border border-black/[0.05];
+  background-color: var(--background-alt);
+  border: 1px solid var(--border);
 }
