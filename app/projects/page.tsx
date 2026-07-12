@@ -34,6 +34,8 @@ export default function ProjectsPage() {
   // Helper to format custom details for each project card
   const getProjectMetadata = (id: string) => {
     switch (id) {
+      case "lecreuset-bug-report":
+        return { year: "2026", category: "QA Testing · Bug Report" };
       case "scm-planner":
         return { year: "2026", category: "Enterprise System · Procurement" };
       case "bia-stock-health":

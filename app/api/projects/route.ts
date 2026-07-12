@@ -4,6 +4,46 @@ export const dynamic = "force-dynamic";
 
 const projects = [
   {
+    id: "lecreuset-bug-report",
+    title: "Le Creuset – Password Reset Bug Report",
+    type: "bug-report",
+    description:
+      "A QA bug report documenting a critical authentication flow defect on Le Creuset's e-commerce login page where the \"Forgot Password\" link fails to redirect users to the password creation form.",
+    details:
+      "This bug report was filed during a uTest Academy testing cycle for Le Creuset's website. The issue involves a broken password recovery workflow: after submitting a forgot-password request and clicking the reset link from the email, the application fails to load the password creation form. Instead, it displays a modal notification and redirects back to the login screen — effectively locking users out of their account recovery flow.",
+    techStack: ["Manual QA Testing", "Bug Reporting", "Chrome DevTools", "Windows 10"],
+    features: [
+      "Structured bug report with standardized title format",
+      "Clear steps to reproduce with numbered sequence",
+      "Expected vs. Actual result documentation",
+      "Annotated screenshots with red-box highlights as visual evidence",
+      "Severity classification and environment specification",
+      "Filed via uTest Academy platform"
+    ],
+    screenshots: [
+      "/screenshots/lecreuset-bug-report/login-page.png",
+      "/screenshots/lecreuset-bug-report/forgot-password-form.png",
+      "/screenshots/lecreuset-bug-report/error-modal.png",
+      "/screenshots/lecreuset-bug-report/utest-platform.png"
+    ] as string[],
+    isOngoing: false,
+    severity: "High",
+    environment: "Windows 10 / Google Chrome (Latest Version)",
+    targetUrl: "https://www.lecreuset.com/customer/account/login",
+    bugReport: {
+      stepsToReproduce: [
+        "Navigate to the login page: https://www.lecreuset.com/customer/account/login",
+        "Click on the \"Forgot password?\" hyperlink below the password field.",
+        "Input a registered email address and submit the form.",
+        "Access the email inbox, locate the system-generated password reset email, and click the provided reset link."
+      ],
+      expectedResult:
+        "The system should securely validate the token and redirect the user directly to the Password Creation / Reset Form to set and save a new password.",
+      actualResult:
+        "The application fails to load the password creation form. Instead, it displays a modal/notification banner stating \"Request to Reset Your Password Received\" and immediately routes the user back to the default login screen, preventing the user from updating their password."
+    }
+  },
+  {
     id: "data-analytics-sql",
     title: "Data Analytics & SQL",
     description:

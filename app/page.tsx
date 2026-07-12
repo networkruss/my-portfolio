@@ -37,6 +37,8 @@ export default function Home() {
   // Helper to resolve custom categories for Neil's projects to match the design style
   const getProjectCategory = (id: string, techStack: string[]) => {
     switch (id) {
+      case "lecreuset-bug-report":
+        return "QA Testing · Authentication Flow";
       case "scm-planner":
         return "Supply Chain · Systems Planning";
       case "bia-stock-health":

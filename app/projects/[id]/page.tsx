@@ -3,13 +3,20 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, X, ChevronLeft, ChevronRight, ImageOff, ExternalLink } from "lucide-react";
+import { ArrowLeft, X, ChevronLeft, ChevronRight, ImageOff, ExternalLink, AlertTriangle, Monitor, Globe, CheckCircle2, XCircle } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+
+interface BugReport {
+  stepsToReproduce: string[];
+  expectedResult: string;
+  actualResult: string;
+}
 
 interface Project {
   id: string;
   title: string;
+  type?: string;
   description: string;
   details: string;
   techStack: string[];
@@ -20,6 +27,10 @@ interface Project {
   solution?: string;
   impact?: string;
   githubLink?: string;
+  severity?: string;
+  environment?: string;
+  targetUrl?: string;
+  bugReport?: BugReport;
 }
 
 export default function ProjectDetail() {
@@ -69,6 +80,7 @@ export default function ProjectDetail() {
   }
 
   const hasScreenshots = project.screenshots && project.screenshots.length > 0;
+  const isBugReport = project.type === "bug-report";
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-12 md:py-20 relative z-10 text-[var(--foreground)]">
@@ -90,12 +102,42 @@ export default function ProjectDetail() {
               {project.title}
             </h1>
             <span className="text-xs text-[var(--muted-foreground)] font-sans">
-              2026 · Enterprise System
+              {isBugReport ? "2026 · QA Testing" : "2026 · Enterprise System"}
             </span>
           </div>
           <p className="text-base md:text-lg text-[var(--muted-foreground)] font-sans leading-relaxed max-w-3xl">
             {project.description}
           </p>
+
+          {/* Bug Report Metadata Bar */}
+          {isBugReport && (
+            <div className="flex flex-wrap gap-3 mt-6">
+              {project.severity && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-[11px] font-bold tracking-wider uppercase rounded-sm">
+                  <AlertTriangle className="w-3 h-3" />
+                  {project.severity} Severity
+                </span>
+              )}
+              {project.environment && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[var(--background-alt)] border border-[var(--border)] text-[var(--muted-foreground)] text-[11px] font-medium tracking-wide rounded-sm">
+                  <Monitor className="w-3 h-3" />
+                  {project.environment}
+                </span>
+              )}
+              {project.targetUrl && (
+                <a
+                  href={project.targetUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[var(--background-alt)] border border-[var(--border)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] text-[11px] font-medium tracking-wide rounded-sm transition-colors"
+                >
+                  <Globe className="w-3 h-3" />
+                  Target URL
+                  <ExternalLink className="w-2.5 h-2.5 opacity-50" />
+                </a>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Cinematic Cover Image */}
@@ -140,6 +182,68 @@ export default function ProjectDetail() {
             </a>
           )}
         </section>
+
+        {/* Bug Report: Steps to Reproduce */}
+        {isBugReport && project.bugReport && (
+          <section className="mb-14">
+            <h2 className="text-xs font-bold tracking-[0.2em] text-[var(--muted-foreground)] uppercase mb-6">
+              STEPS TO REPRODUCE
+            </h2>
+            <div className="space-y-4">
+              {project.bugReport.stepsToReproduce.map((step, i) => (
+                <div key={i} className="flex items-start gap-4 group">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--foreground)] text-[var(--background)] flex items-center justify-center text-xs font-bold font-sans">
+                    {i + 1}
+                  </div>
+                  <p className="text-sm md:text-base text-[var(--muted-foreground)] font-sans leading-relaxed pt-1.5">
+                    {step}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Bug Report: Expected vs Actual Result */}
+        {isBugReport && project.bugReport && (
+          <section className="mb-16 relative">
+            <div className="absolute -inset-x-6 inset-y-0 bg-[var(--background-alt)] border-y border-[var(--border)] -z-10 rounded-sm" />
+            <div className="py-10 px-2 md:px-0">
+              <h3 className="text-xs font-bold tracking-[0.2em] text-[var(--foreground)] uppercase mb-8">
+                EXPECTED VS. ACTUAL RESULT
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                {/* Expected Result */}
+                <div className="relative p-6 bg-[var(--background)] border border-emerald-500/20 rounded-sm">
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-emerald-500 rounded-t-sm" />
+                  <div className="flex items-center gap-2 mb-4">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                    <h4 className="text-[11px] font-bold tracking-wider uppercase text-emerald-600 dark:text-emerald-400">
+                      Expected Result
+                    </h4>
+                  </div>
+                  <p className="text-xs md:text-sm leading-relaxed text-[var(--muted-foreground)]">
+                    {project.bugReport.expectedResult}
+                  </p>
+                </div>
+
+                {/* Actual Result */}
+                <div className="relative p-6 bg-[var(--background)] border border-red-500/20 rounded-sm">
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-red-500 rounded-t-sm" />
+                  <div className="flex items-center gap-2 mb-4">
+                    <XCircle className="w-4 h-4 text-red-500" />
+                    <h4 className="text-[11px] font-bold tracking-wider uppercase text-red-600 dark:text-red-400">
+                      Actual Result
+                    </h4>
+                  </div>
+                  <p className="text-xs md:text-sm leading-relaxed text-[var(--muted-foreground)]">
+                    {project.bugReport.actualResult}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Case Study Section */}
         {(project.challenge || project.solution || project.impact) && (
@@ -217,10 +321,10 @@ export default function ProjectDetail() {
           </section>
         </div>
 
-        {/* Screenshot Gallery */}
+        {/* Screenshot Gallery / Visual Evidence */}
         <section className="mb-14 border-t border-[var(--border)] pt-12">
           <h2 className="text-xs font-bold tracking-[0.2em] text-[var(--muted-foreground)] uppercase mb-6">
-            SCREENSHOT GALLERY
+            {isBugReport ? "VISUAL EVIDENCE / PROOF OF CONCEPT" : "SCREENSHOT GALLERY"}
           </h2>
 
           {hasScreenshots ? (
